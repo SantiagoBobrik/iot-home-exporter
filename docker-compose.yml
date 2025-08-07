@@ -1,0 +1,10 @@
+services:
+  app:
+    build: .
+    volumes:
+      - sqlite_data:/app/mydb.sqlite
+    restart: unless-stopped
+    container_name: go_sqlite_app
+
+volumes:
+  sqlite_data:
