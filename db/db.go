@@ -53,7 +53,7 @@ func (d *DB) InsertData(data domain.Data) error {
 
 // GetUsers returns all users.
 func (d *DB) GetData() ([]domain.Data, error) {
-	rows, err := d.conn.Query("SELECT * FROM data ORDER BY created_at DESC")
+	rows, err := d.conn.Query("SELECT id, device_id, temperature, humidity, created_at FROM data ORDER BY created_at DESC")
 	if err != nil {
 		return []domain.Data{}, err
 	}
@@ -62,7 +62,7 @@ func (d *DB) GetData() ([]domain.Data, error) {
 
 	for rows.Next() {
 		var u domain.Data
-		if err := rows.Scan(&u.ID, &u.Temperature, &u.Humidity, &u.CreatedAt, &u.DeviceID); err != nil {
+		if err := rows.Scan(&u.ID, &u.DeviceID, &u.Temperature, &u.Humidity, &u.CreatedAt); err != nil {
 			return nil, err
 		}
 		data = append(data, u)
