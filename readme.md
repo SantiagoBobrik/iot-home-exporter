@@ -37,6 +37,27 @@ temperature_celsius{device_id="device123"} 23.5
 humidity_percent{device_id="device123"} 60.2
 ```
 
+## Prometheus Integration
+
+To make Prometheus start scraping metrics from the IoT Home Exporter, add a new `scrape_configs` entry in your `prometheus.yml` configuration file.
+
+Example:
+
+```yaml
+scrape_configs:
+  # ... other existing jobs
+
+  - job_name: 'iot-home-exporter'
+    scrape_interval: 30s   # How often Prometheus will scrape the metrics
+    static_configs:
+      - targets: ['<HOST_OR_SERVER_IP>:8555']
+```
+>📌 In this example:
+>8555 is the host port mapped to the container's internal port 3000 (ports: 8555:3000 in docker-compose.yml).
+>scrape_interval controls how often Prometheus collects data from the exporter.
+>The default global interval is often 15s, but for IoT metrics you can use 30s or 1m to reduce load if ultra-high frequency is not needed.
+>If running the app directly (without Docker), replace 8555 with the port where the app is listening (3000 by default).
+
 ## Technologies
 
 - [Go](https://golang.org/)
@@ -120,4 +141,3 @@ Prometheus metrics endpoint for monitoring.
 - `db/` - Database logic
 - `config/` - Metrics configuration
 
-##
