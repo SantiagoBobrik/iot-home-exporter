@@ -10,6 +10,33 @@ This project is a simple RESTful API for storing and retrieving IoT sensor data 
 - **SQLite**: Local database for persistent storage.
 - **Prometheus**: Gauge metrics for temperature and humidity per device.
 
+
+## Prometheus Metrics
+
+The API exposes two Prometheus gauge metrics for monitoring sensor data:
+
+- **temperature_celsius**  
+  - **Type:** Gauge  
+  - **Labels:** `device_id`  
+  - **Description:** Current temperature in degrees Celsius for each device.
+
+- **humidity_percent**  
+  - **Type:** Gauge  
+  - **Labels:** `device_id`  
+  - **Description:** Relative humidity in percent for each device.
+
+You can scrape these metrics at the `/metrics` endpoint. Example output:
+
+```
+# HELP temperature_celsius Current temperature in degrees Celsius
+# TYPE temperature_celsius gauge
+temperature_celsius{device_id="device123"} 23.5
+
+# HELP humidity_percent Relative humidity in percent
+# TYPE humidity_percent gauge
+humidity_percent{device_id="device123"} 60.2
+```
+
 ## Technologies
 
 - [Go](https://golang.org/)
