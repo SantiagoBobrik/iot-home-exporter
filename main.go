@@ -81,6 +81,6 @@ func initDatabase() *db.DB {
 }
 
 func init() {
-	prometheus.MustRegister(config.GaugeMetrics.Humidity)
+	prometheus.MustRegister(config.GaugeMetrics.Temperature)
 	prometheus.MustRegister(config.GaugeMetrics.Humidity)
 }
