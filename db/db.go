@@ -36,6 +36,7 @@ func (d *DB) InitSchema() error {
 	query := `
 	CREATE TABLE IF NOT EXISTS data (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
+		device_id text unique,
 		temperature integer NOT NULL,
 		humidity integer NOT NULL,
         created_at DATETIME NOT NULL
@@ -46,7 +47,7 @@ func (d *DB) InitSchema() error {
 
 // InsertUser inserts a new user into the DB.
 func (d *DB) InsertData(data domain.Data) error {
-	_, err := d.conn.Exec("INSERT INTO data (temperature, humidity, created_at) VALUES (?, ?, ?)", data.Temperature, data.Humidity, data.CreatedAt)
+	_, err := d.conn.Exec("INSERT INTO data (temperature, humidity, created_at, device_id) VALUES (?, ?, ?, ?)", data.Temperature, data.Humidity, data.CreatedAt, data.DeviceID)
 	return err
 }
 
