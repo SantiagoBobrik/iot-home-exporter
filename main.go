@@ -4,7 +4,6 @@ import (
 	"SantiagoBobrik/iot-home/config"
 	"SantiagoBobrik/iot-home/db"
 	"SantiagoBobrik/iot-home/domain"
-	"fmt"
 	"log"
 	"time"
 
@@ -48,7 +47,7 @@ func main() {
 
 		if err := database.InsertData(*body); err != nil {
 			errResponse := domain.ResponseError{Code: 500, Message: "error on creating row data"}
-			fmt.Printf("Error %v - %v", errResponse.Error(), err)
+			log.Printf("Error %v - %v", errResponse.Error(), err)
 			return c.Status(500).JSON(errResponse)
 		}
 		return c.Status(fiber.StatusCreated).Send([]byte{})
@@ -58,7 +57,7 @@ func main() {
 		data, err := database.GetData()
 		if err != nil {
 			errResponse := domain.ResponseError{Code: 500, Message: "error on getting data"}
-			fmt.Printf("Error %v - %v", errResponse.Error(), err)
+			log.Printf("Error %v - %v", errResponse.Error(), err)
 			return c.Status(500).JSON(errResponse)
 		}
 		return c.Status(fiber.StatusOK).JSON(domain.Response{Data: data})
@@ -77,6 +76,7 @@ func initDatabase() *db.DB {
 		log.Fatal(err)
 	}
 
+	log.Println("DATABASE DONE")
 	return database
 }
 
