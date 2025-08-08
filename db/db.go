@@ -62,7 +62,7 @@ func (d *DB) GetData() ([]domain.Data, error) {
 
 	for rows.Next() {
 		var u domain.Data
-		if err := rows.Scan(&u.ID, &u.Temperature, &u.Humidity, &u.CreatedAt); err != nil {
+		if err := rows.Scan(&u.ID, &u.Temperature, &u.Humidity, &u.CreatedAt, &u.DeviceID); err != nil {
 			return nil, err
 		}
 		data = append(data, u)
