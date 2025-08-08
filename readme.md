@@ -1,4 +1,4 @@
-# IoT Home API
+# IoT Home Exporter
 
 This project is a simple RESTful API for storing and retrieving IoT sensor data (temperature and humidity) from various devices. It uses Go, Fiber, SQLite, and Prometheus for metrics.
 
