@@ -9,6 +9,8 @@ import (
 
 	"github.com/gofiber/fiber/v3"
 	"github.com/gofiber/fiber/v3/middleware/adaptor"
+	"github.com/gofiber/fiber/v3/middleware/logger"
+	"github.com/gofiber/fiber/v3/middleware/requestid"
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/prometheus/client_golang/prometheus/promhttp"
 )
@@ -19,7 +21,10 @@ func main() {
 	defer database.Close()
 
 	app := fiber.New()
-
+	app.Use(requestid.New())
+	app.Use(logger.New(logger.Config{
+		Format: "[${ip}]:${port} ${status} - ${method} ${path}\n",
+	}))
 	app.Get("/metrics", adaptor.HTTPHandler(promhttp.Handler()))
 
 	app.Post("/data", func(c fiber.Ctx) error {
