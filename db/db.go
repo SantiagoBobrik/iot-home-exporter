@@ -36,7 +36,7 @@ func (d *DB) InitSchema() error {
 	query := `
 	CREATE TABLE IF NOT EXISTS data (
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		device_id text unique,
+		device_id text,
 		temperature integer NOT NULL,
 		humidity integer NOT NULL,
         created_at DATETIME NOT NULL

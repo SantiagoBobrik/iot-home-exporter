@@ -2,9 +2,11 @@ services:
   app:
     build: .
     volumes:
-      - sqlite_data:/app/mydb.sqlite
+      - sqlite_data:/app
     restart: unless-stopped
     container_name: go_sqlite_app
+    ports:
+      - "8585:3000"
 
 volumes:
   sqlite_data:

@@ -8,14 +8,14 @@ var GaugeMetrics = struct {
 	Temperature: prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name: "temperature_celsius",
-			Help: "Temperatura actual en grados Celsius",
+			Help: "Current temperature in degrees Celsius",
 		},
 		[]string{"device_id"},
 	),
 	Humidity: prometheus.NewGaugeVec(
 		prometheus.GaugeOpts{
 			Name: "humidity_percent",
-			Help: "Humedad relativa en %",
+			Help: "Relative humidity in percent",
 		},
 		[]string{"device_id"},
 	),
